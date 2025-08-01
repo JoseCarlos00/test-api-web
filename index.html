@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Prueba API y Cookies</title>
+</head>
+<body>
+  <h1>Prueba de API y Cookies</h1>
+  <p>
+    User: <span id="username"></span>
+  </p>
+
+  <button id="llamarAPI">Llamar API</button>
+  <button id="verCookies">Ver Cookies</button>
+  <button id="borrarCookies">Borrar Cookies</button>
+
+  <button id="solicitarMensajes">Solicitar mensajes</button>
+
+  <form action="" method="post" id="loginForm">
+    <label>
+      Username
+      <input type="text" name="username" value="user1234"/>
+    </label>
+    <label>
+      Password
+      <input type="password" name="password" value="password" />
+    </label>
+    <button type="submit">Enviar</button>
+  </form>
+
+  <pre id="resultado"></pre>
+  
+
+  <script type="module" src="index.js"></script>
+</body>
+</html>
