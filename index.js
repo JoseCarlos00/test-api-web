@@ -68,6 +68,7 @@ async function solicitarMensajes() {
 
 		const response = await fetch(API_URL_GET_ALL_MSM, {
 			method: 'GET',
+			credentials: 'include',
 			headers: {
 				'Content-Type': 'application/json',
         'Authorization': `Bearer ${tokenStorage ?? token}`
