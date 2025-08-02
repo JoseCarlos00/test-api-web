@@ -1,8 +1,13 @@
 // Llamada de prueba a una API pública (puedes cambiarla por tu backend)
 const API_URL = 'https://jsonplaceholder.typicode.com/users/1';
 
-const API_URL_GET_ALL_MSM = 'http://localhost:3000/api/messages';
-const API_URL_TOKEN = 'http://localhost:3000/api/auth/login';
+const DOMAIN = "http://192.168.1.4:3000"
+
+const API_URL_GET_ALL_MSM = DOMAIN + '/api/messages';
+const API_URL_TOKEN = DOMAIN + '/api/auth/login';
+
+console.log({API_URL_GET_ALL_MSM});
+
 
 // Elementos del DOM
 
@@ -45,6 +50,8 @@ function borrarCookies() {
 	document.cookie = 'nombre=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
   document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 	resultadoElement.textContent = 'Cookies eliminadas.';
+
+	window.sessionStorage.removeItem('token')
 }
 
 
@@ -52,18 +59,19 @@ function borrarCookies() {
 // Solicitar token enviando username y password en el body
 async function solicitarMensajes() {
 
+	const tokenStorage = window.sessionStorage.getItem('token')
+	
 	try {
     const token =
-			'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxMjM0Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTQwODE3NzIsImV4cCI6MTc1NDA4MjY3Mn0.xUibptCTulPzLTKCXPUGQxzEiEdw69_Pq5zHMn30ZeU';
+			"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxMjM0Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTQwOTU4MDAsImV4cCI6MTc1NDA5NjcwMH0.ifyyvEBRqCxHKcT8tal_fPI7d9GRvLSS5EbyiDEo-yo"
     console.log({token});
 
 		const response = await fetch(API_URL_GET_ALL_MSM, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${tokenStorage ?? token}`
 			},
-      credentials: 'include',
 		});
 		const data = await response.json();
     console.log(data);
@@ -107,6 +115,7 @@ loginForm.addEventListener('submit', async (event) => {
 		// Guardar el token en una cookie
 		document.cookie = `token=${accessToken}; path=/; max-age=3600`; // dura 1 hora
 		resultadoElement.textContent = `Token guardado en cookie: ${accessToken}`;
+		window.sessionStorage.setItem('token', accessToken)
 
     document.getElementById('username').textContent = payload.username;
 	} catch (error) {
