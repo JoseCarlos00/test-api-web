@@ -14,5 +14,5 @@ GET https://192.168.1.4:3000/api/messages
 Authorization: Bearer {{token}}
 
 ### Obtener mensajes coñquery params
-GET https://192.168.1.4:3000/api/messages?
+GET https://192.168.1.4:3000/api/messages?limit=2
 Authorization: Bearer {{token}}
