@@ -1,5 +1,5 @@
 ### Iniciar session
-POST https://localhost:3000/api/auth/login
+POST https://192.168.1.4:3000/api/auth/login
 Content-Type: application/json
 
 {
@@ -7,6 +7,12 @@ Content-Type: application/json
   "password": "password"
 }
 
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxMjM0Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTQxODkwNjIsImV4cCI6MTc1NDE4OTk2Mn0.Ktj-xBuKhKI49OyGHfBGlv4nc3YKvSn61N8Bhjp3PNQ
+
 ### Obtener mensajes
-GET https://localhost:3000/api/messages
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxMjM0Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTQxMTA1MTYsImV4cCI6MTc1NDExMTQxNn0.Mia7-VV5j638H29YgUKqtGGtCo8htl7udz40kN9EsbQ
+GET https://192.168.1.4:3000/api/messages
+Authorization: Bearer {{token}}
+
+### Obtener mensajes coñquery params
+GET https://192.168.1.4:3000/api/messages?
+Authorization: Bearer {{token}}
